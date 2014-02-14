@@ -75,16 +75,16 @@ var timeouts = [];
 
 window.onload = function () {
 
-    var c = (chapter == 0 ? 1 : chapter);
+    var c = (chapter === 0 ? 1 : chapter);
     document.getElementById("select_chapter").getElementsByTagName('option')[c - 1].selected = 'selected';
     add_verse(verse_count[c]);
-    if (typeof document.getElementById("select_verse").getElementsByTagName('option')[verse_count[c] - 1] != "undefined")
+    if (typeof document.getElementById("select_verse").getElementsByTagName('option')[verse_count[c] - 1] !== "undefined")
         document.getElementById("select_verse").getElementsByTagName('option')[verse_count[c] - 1].selected = 'selected';
 
-    if (typeof sessionStorage["sa_visible"] == "undefined") sessionStorage["sa_visible"] = "ON";
-    if (typeof sessionStorage["tr_visible"] == "undefined") sessionStorage["tr_visible"] = "ON";
-    if (typeof sessionStorage["en_visible"] == "undefined") sessionStorage["en_visible"] = "ON";
-    if (typeof sessionStorage["au_audible"] == "undefined") sessionStorage["au_audible"] = "OFF";
+    if (typeof sessionStorage["sa_visible"] === "undefined") sessionStorage["sa_visible"] = "ON";
+    if (typeof sessionStorage["tr_visible"] === "undefined") sessionStorage["tr_visible"] = "ON";
+    if (typeof sessionStorage["en_visible"] === "undefined") sessionStorage["en_visible"] = "ON";
+    if (typeof sessionStorage["au_audible"] === "undefined") sessionStorage["au_audible"] = "OFF";
 
     document.getElementById("sa_visible").value = sessionStorage["sa_visible"];
     document.getElementById("tr_visible").value = sessionStorage["tr_visible"];
@@ -96,7 +96,7 @@ window.onload = function () {
     document.getElementById("en_visible").title = "Toggle English translation. [E]-KEY";
     document.getElementById("au_audible").title = "Toggle Audio. [A]-KEY";
 
-    if (chapter != 0) create_audio_tags(document.getElementById("au_audible").value);
+    if (chapter !== 0) create_audio_tags(document.getElementById("au_audible").value);
 };
 
 function create_audio_tags(onoff) {
@@ -104,7 +104,7 @@ function create_audio_tags(onoff) {
     for (var i in audio_pos) {
         var au = document.createElement("audio");
         au.id = "gita_au_" + chapter.toString() + "-" + i.toString();
-        au.src = "audio/gita" + chapter.toString() + ".mp3#t=" +  (audio_pos[i].toString()) + (typeof audio_pos[Number(i) + 1] != "undefined" ? "," + (audio_pos[Number(i) + 1]) : "");
+        au.src = "audio/gita" + chapter.toString() + ".mp3#t=" +  (audio_pos[i].toString()) + (typeof audio_pos[Number(i) + 1] !== "undefined" ? "," + (audio_pos[Number(i) + 1]) : "");
         au.preload = "auto";
         var section_id = "gita_" + chapter.toString() + "-" + i.toString();
         var section = document.getElementById(section_id);
@@ -121,7 +121,7 @@ function switch_audio(onoff) {
         var au = document.getElementById(au_id);
         var section_id = "gita_" + chapter.toString() + "-" + i.toString();
         var section = document.getElementById(section_id);
-        if (onoff == "ON") {
+        if (onoff === "ON") {
             au.setAttribute("data-autoplay", "");
             section.setAttribute("data-autoslide", Math.floor((audio_pos[Number(i) + 1] - audio_pos[i]) * 1000));
         }
@@ -135,9 +135,9 @@ function switch_audio(onoff) {
     var slideid = Reveal.getCurrentSlide().id;
     for (var t in timeouts) clearTimeout(timeouts[t]); timeouts = [];
 
-    if (slideid.substring(0, 4) != "link") {
+    if (slideid.substring(0, 4) !== "link") {
         var au_id = "gita_au_" + slideid.split("_")[1];
-        if (onoff == "ON") {
+        if (onoff === "ON" && Number(document.getElementById(slideid).getAttribute("data-autoslide")) > 1000) {
             Reveal.configure({ autoSlide: 5000, autoSlideStoppable: false });
             document.getElementById(au_id).load();
             document.getElementById(au_id).play();
@@ -154,7 +154,7 @@ function switch_audio(onoff) {
 
 function toggle_audio(button) {
 
-    button.value = (button.value == "ON" ? "OFF" : "ON");
+    button.value = (button.value === "ON" ? "OFF" : "ON");
     sessionStorage[button.id] = button.value;
     button.blur();
 
@@ -175,7 +175,7 @@ Reveal.initialize({
 Reveal.addEventListener('ready', function (event) {
     document.getElementById("wait").style.display = "none";
     var slideid = event.currentSlide.id;
-    if (slideid.substring(0, 4) == "link") {
+    if (slideid.substring(0, 4) === "link") {
         Reveal.right();
         return;
     }
@@ -184,17 +184,17 @@ Reveal.addEventListener('ready', function (event) {
 Reveal.addEventListener('slidechanged', function (event) {
 
     var slideid = event.currentSlide.id;
-    var c = (chapter == 0 ? 1 : chapter);
+    var c = (chapter === 0 ? 1 : chapter);
 
     if (Reveal.isFirstSlide()) {
-        if (slideid.substring(0, 4) == "link") {
+        if (slideid.substring(0, 4) === "link") {
             location.href = slideid.split("_")[1] + ".html#/" + "gita_" + (c-1).toString() + "-" + verse_count[c-1];
             return;
         }
     }
 
     if (Reveal.isLastSlide()) {
-        if (slideid.substring(0, 4) == "link") {
+        if (slideid.substring(0, 4) === "link") {
             location.href = slideid.split("_")[1] + ".html";
             return;
         }
@@ -215,7 +215,7 @@ Reveal.addEventListener('slidechanged', function (event) {
     }
 
     for (var t in timeouts) clearTimeout(timeouts[t]); timeouts = [];
-    if (sessionStorage["au_audible"] == "ON") {
+    if (sessionStorage["au_audible"] === "ON" && Number(event.currentSlide.getAttribute("data-autoslide")) > 1000) {
         timeouts.push(setTimeout(function () {
             Reveal.next();
         }, Number(event.currentSlide.getAttribute("data-autoslide"))))
@@ -238,7 +238,7 @@ document.onkeydown = function (evt) {
 };
 
 function toggle(button) {
-    button.value = (button.value == "ON" ? "OFF" : "ON");
+    button.value = (button.value === "ON" ? "OFF" : "ON");
     sessionStorage[button.id] = button.value;
     button.blur();
     show_hide();
@@ -256,17 +256,17 @@ function show_hide() {
         var tr_id = "gita_tr_" + s[1];
         var en_id = "gita_en_" + s[1];
 
-        if (document.getElementById("sa_visible").value == "ON")
+        if (document.getElementById("sa_visible").value === "ON")
             document.getElementById(sa_id).style.display = "block";
         else
             document.getElementById(sa_id).style.display = "none";
 
-        if (document.getElementById("tr_visible").value == "ON")
+        if (document.getElementById("tr_visible").value === "ON")
             document.getElementById(tr_id).style.display = "block";
         else
             document.getElementById(tr_id).style.display = "none";
 
-        if (document.getElementById("en_visible").value == "ON")
+        if (document.getElementById("en_visible").value === "ON")
             document.getElementById(en_id).style.display = "block";
         else
             document.getElementById(en_id).style.display = "none";

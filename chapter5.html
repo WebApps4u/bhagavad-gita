@@ -658,18 +658,22 @@
 
     <footer>
         <form style="position: absolute; left: 5px; bottom: 5px; z-index: 100">
-            <strong>सं</strong>
-            <input id="sa_visible" type="button" value="ON" style="height: 35px;" onclick="toggle(this);" />
+            <small><strong>सं</strong></small>
+            <input id="sa_visible" type="button" value="ON" style="height: 30px;" onclick="toggle(this);" />
 
-            EN:
-            <input id="en_visible" type="button" value="ON" style="height: 35px;" onclick="toggle(this);" />
+            <small>EN:</small>
+            <input id="en_visible" type="button" value="ON" style="height: 30px;" onclick="toggle(this);" />
 
-            TR:
-            <input id="tr_visible" type="button" value="ON" style="height: 35px;" onclick="toggle(this);" />
+            <small>TR:</small>
+            <input id="tr_visible" type="button" value="ON" style="height: 30px;" onclick="toggle(this);" />
 
-            &nbsp;&nbsp;&nbsp;
-            <input id="previous_verse" type="button" value="<" style="width: 35px; height: 35px;" onclick="Reveal.left(); this.blur();" />
-            <input id="next_verse" type="button" value=">" style="width: 35px; height: 35px; " onclick="Reveal.right(); this.blur();" />
+            &nbsp;
+            <small>AU:</small>
+            <input id="au_audible" type="button" value="OFF" style="height: 30px;" onclick="toggle_audio(this);" />
+
+            &nbsp;
+            <input id="previous_verse" type="button" value="<" style="width: 25px; height: 35px;" onclick="Reveal.left(); this.blur();" />
+            <input id="next_verse" type="button" value=">" style="width: 25px; height: 35px; " onclick="Reveal.right(); this.blur();" />
         </form>
     </footer>
 
