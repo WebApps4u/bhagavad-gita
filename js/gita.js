@@ -73,14 +73,6 @@ var audio_pos = {
 
 var timeouts = [];
 
-function getPhoneGapPath() {
-
-    var path = window.location.pathname;
-    path = path.substr(path, path.length - 13);
-    return 'file://' + path;
-
-};
-
 window.onload = function () {
 
     var c = (chapter == 0 ? 1 : chapter);
