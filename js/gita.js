@@ -112,7 +112,7 @@ function create_audio_tags(onoff) {
     for (var i in audio_pos) {
         var au = document.createElement("audio");
         au.id = "gita_au_" + chapter.toString() + "-" + i.toString();
-        au.src = "audio/gita" + chapter.toString() + ".mp3#t=" +  (audio_pos[i].toString()) + (typeof audio_pos[Number(i) + 1] != "undefined" ? "," + (audio_pos[Number(i) + 1]) : "");
+        au.src = "audio/gita" + chapter.toString() + ".ogg#t=" +  (audio_pos[i].toString()) + (typeof audio_pos[Number(i) + 1] != "undefined" ? "," + (audio_pos[Number(i) + 1]) : "");
         au.preload = "auto";
         var section_id = "gita_" + chapter.toString() + "-" + i.toString();
         var section = document.getElementById(section_id);
