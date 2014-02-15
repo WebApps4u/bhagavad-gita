@@ -333,7 +333,7 @@ function onDeviceReady() {
 
 function play_now(verse_no) {
     if (media_gita === null) {
-        var src = "file:///data/data/org.sanjay.gita/hydra_app/audio/gita" + chapter + ".mp3";
+        var src = "file:///android_asset/www/audio/gita" + chapter + ".mp3";
         media_gita = new Media(src, onSuccess, onError);
     }
     
