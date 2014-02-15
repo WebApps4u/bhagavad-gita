@@ -96,7 +96,7 @@ window.onload = function () {
     document.getElementById("en_visible").title = "Toggle English translation. [E]-KEY";
     document.getElementById("au_audible").title = "Toggle Audio. [A]-KEY";
 
-    if (chapter !== 0) create_audio_tags(document.getElementById("au_audible").value);
+    if (!window.cordova  && chapter !== 0) create_audio_tags(document.getElementById("au_audible").value);
 };
 
 function create_audio_tags(onoff) {
@@ -105,6 +105,7 @@ function create_audio_tags(onoff) {
         var au = document.createElement("audio");
         au.id = "gita_au_" + chapter.toString() + "-" + i.toString();
         au.src = "audio/gita" + chapter.toString() + ".mp3#t=" +  (audio_pos[i].toString()) + (typeof audio_pos[Number(i) + 1] !== "undefined" ? "," + (audio_pos[Number(i) + 1]) : "");
+        au.setAttribute("data-play-from", audio_pos[i].toString());
         au.preload = "auto";
         var section_id = "gita_" + chapter.toString() + "-" + i.toString();
         var section = document.getElementById(section_id);
@@ -138,9 +139,9 @@ function switch_audio(onoff) {
     if (slideid.substring(0, 4) !== "link") {
         var au_id = "gita_au_" + slideid.split("_")[1];
         if (onoff === "ON" && Number(document.getElementById(slideid).getAttribute("data-autoslide")) > 1000) {
-            Reveal.configure({ autoSlide: 5000, autoSlideStoppable: false });
-            document.getElementById(au_id).load();
-            document.getElementById(au_id).play();
+            var au = document.getElementById(au_id);
+            au.load();
+            au.play();
             timeouts.push(setTimeout(function () {
                 Reveal.next();
             }, Number(document.getElementById(slideid).getAttribute("data-autoslide"))));
@@ -158,7 +159,8 @@ function toggle_audio(button) {
     sessionStorage[button.id] = button.value;
     button.blur();
 
-    switch_audio(button.value);
+    if (!window.cordova)
+        switch_audio(button.value);
 }
 
 Reveal.initialize({
@@ -179,6 +181,8 @@ Reveal.addEventListener('ready', function (event) {
         Reveal.right();
         return;
     }
+    
+    if (window.cordova) document.addEventListener("deviceready", onDeviceReady, false);
 });
  
 Reveal.addEventListener('slidechanged', function (event) {
@@ -215,7 +219,17 @@ Reveal.addEventListener('slidechanged', function (event) {
     }
 
     for (var t in timeouts) clearTimeout(timeouts[t]); timeouts = [];
+    
     if (sessionStorage["au_audible"] === "ON" && Number(event.currentSlide.getAttribute("data-autoslide")) > 1000) {
+        
+        if (window.cordova) 
+            play_now(document.nav.select_verse.value);
+        else {
+            var au_id = "gita_au_" + slideid.split("_")[1];
+            var au = document.getElementById(au_id);
+            au.currentTime = au.getAttribute("data-play-from");
+        }
+        
         timeouts.push(setTimeout(function () {
             Reveal.next();
         }, Number(event.currentSlide.getAttribute("data-autoslide"))));
@@ -297,4 +311,25 @@ function add_verse(count) {
         option.text = i;
         select_verse.add(option);
     }
+}
+
+var media_gita = null;
+
+function onDeviceReady() {
+    var src = "audio/gita" + chapter + ".mp3";
+    media_gita = new Media(src, onSuccess, onError);
+    if (sessionStorage["au_audible"] === "ON") play_now(document.nav.select_verse.value);
+}
+
+function play_now(verse_no) {
+    media_gita.seekTo(audio_pos[verse_no]);
+    media_gita.play();
+}
+
+function onSuccess() {
+    console.log("Media object created");
+}
+
+function onError(error) {
+    console.log("Error creating Media object. code: " + error.code + " message: " + error.message);
 }
