@@ -333,7 +333,8 @@ function onDeviceReady() {
 
 function play_now(verse_no) {
     if (media_gita === null) {
-        var src = "audio/gita" + chapter + ".mp3";
+        var c = (chapter === 0 ? 1 : chapter);
+        var src = "audio/gita" + c + ".mp3";
         media_gita = new Media(src, onSuccess, onError);
     }
     
