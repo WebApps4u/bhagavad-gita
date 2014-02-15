@@ -22,7 +22,6 @@
   <gap:platform name="winphone" />
 
   <gap:plugin name="org.apache.cordova.media" />
-  <gap:plugin name="org.apache.cordova.core.Device"/>
   
   <access origin="http://127.0.0.1*" />
   
