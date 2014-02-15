@@ -198,19 +198,15 @@ Reveal.addEventListener('slidechanged', function (event) {
 
     var slideid = event.currentSlide.id;
     var c = (chapter === 0 ? 1 : chapter);
-
-    if (Reveal.isFirstSlide()) {
-        if (slideid.substring(0, 4) === "link") {
-            location.href = slideid.split("_")[1] + ".html#/" + "gita_" + (c-1).toString() + "-" + verse_count[c-1];
-            return;
-        }
+    
+    if (slideid.substring(0, 4) === "link") {
+        location.href = slideid.split("_")[1] + ".html#/" + "gita_" + (c-1).toString() + "-" + verse_count[c-1];
+        return;
     }
 
-    if (Reveal.isLastSlide()) {
-        if (slideid.substring(0, 4) === "link") {
-            location.href = slideid.split("_")[1] + ".html";
-            return;
-        }
+    if (slideid.substring(0, 4) === "link") {
+        location.href = slideid.split("_")[1] + ".html";
+        return;
     }
 
     var c = 0, v = 0;
