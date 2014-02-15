@@ -68,7 +68,8 @@ var audio_pos = {
     45: 785.539,
     46: 801.880,
     47: 819.701,
-    48: 839.234
+    48: 839.234,
+    49: 879.000
 };
 
 var timeouts = [];
@@ -109,7 +110,8 @@ function create_audio_tags(onoff) {
         au.preload = "auto";
         var section_id = "gita_" + chapter.toString() + "-" + i.toString();
         var section = document.getElementById(section_id);
-        section.appendChild(au);
+        if (section !== null) 
+            section.appendChild(au);
      }
     
     switch_audio(onoff);
@@ -122,14 +124,17 @@ function switch_audio(onoff) {
         var au = document.getElementById(au_id);
         var section_id = "gita_" + chapter.toString() + "-" + i.toString();
         var section = document.getElementById(section_id);
-        if (onoff === "ON") {
-            au.setAttribute("data-autoplay", "");
-            section.setAttribute("data-autoslide", Math.floor((audio_pos[Number(i) + 1] - audio_pos[i]) * 1000));
-        }
+        
+        if (section !== null) {
+            if (onoff === "ON") {
+                au.setAttribute("data-autoplay", "");
+                section.setAttribute("data-autoslide", Math.floor((audio_pos[Number(i) + 1] - audio_pos[i]) * 1000));
+            }
 
-        else {
-            au.removeAttribute("data-autoplay");
-            section.removeAttribute("data-autoslide");
+            else {
+                au.removeAttribute("data-autoplay");
+                section.removeAttribute("data-autoslide");
+            }
         }
     }
 
@@ -197,8 +202,6 @@ Reveal.addEventListener('slidechanged', function (event) {
     var slideid = event.currentSlide.id;
     var c = (chapter === 0 ? 1 : chapter);
     
-    console.log("slidechanged: currentSlide.id = " + slideid);
-    
     if (slideid.substring(0, 4) === "link") {
         location.href = slideid.split("_")[1] + ".html#/" + "gita_" + (c-1).toString() + "-" + verse_count[c-1];
         return;
@@ -225,7 +228,10 @@ Reveal.addEventListener('slidechanged', function (event) {
 
     for (var t in timeouts) clearTimeout(timeouts[t]); timeouts = [];
     
-    if (sessionStorage["au_audible"] === "ON" && Number(event.currentSlide.getAttribute("data-autoslide")) > 1000) {
+    var cur_verse_duration = Math.floor((audio_pos[Number(document.nav.select_verse.value) + 1] - audio_pos[document.nav.select_verse.value]) * 1000);
+    
+    console.log("slidechanged: currentSlide.id = " + slideid + " / duration = " + cur_verse_duration);
+    if (sessionStorage["au_audible"] === "ON" && cur_verse_duration > 1000) {
         
         if (window.cordova) 
             play_now(document.nav.select_verse.value);
@@ -237,7 +243,7 @@ Reveal.addEventListener('slidechanged', function (event) {
         
         timeouts.push(setTimeout(function () {
             Reveal.next();
-        }, Number(event.currentSlide.getAttribute("data-autoslide"))));
+        }, cur_verse_duration));
     }
 
     show_hide();
@@ -333,14 +339,15 @@ function onDeviceReady() {
 }
 
 function play_now(verse_no) {
+    console.log("play_now('" + verse_no + "') / audio_pos[verse_no] = " + audio_pos[verse_no]);
     if (media_gita === null) {
         var c = (chapter === 0 ? 1 : chapter);
         var src = "file:///android_asset/www/audio/gita" + c + ".mp3";
         media_gita = new Media(src, onSuccess, onError);
     }
     
-    media_gita.seekTo(audio_pos[verse_no]);
     media_gita.play();
+    media_gita.seekTo(Math.floor(audio_pos[verse_no] * 1000));
 }
 
 function onSuccess() {
