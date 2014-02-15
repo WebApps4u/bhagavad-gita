@@ -143,7 +143,7 @@ function switch_audio(onoff) {
             document.getElementById(au_id).play();
             timeouts.push(setTimeout(function () {
                 Reveal.next();
-            }, Number(document.getElementById(slideid).getAttribute("data-autoslide"))))
+            }, Number(document.getElementById(slideid).getAttribute("data-autoslide"))));
         }
 
         else {
@@ -169,7 +169,7 @@ Reveal.initialize({
     margin: 0,
 
     theme: Reveal.getQueryHash().theme || 'serif', // available themes are in /css/theme
-    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+    transition: Reveal.getQueryHash().transition || 'default' // default/cube/page/concave/zoom/linear/fade/none
 });
 
 Reveal.addEventListener('ready', function (event) {
@@ -218,7 +218,7 @@ Reveal.addEventListener('slidechanged', function (event) {
     if (sessionStorage["au_audible"] === "ON" && Number(event.currentSlide.getAttribute("data-autoslide")) > 1000) {
         timeouts.push(setTimeout(function () {
             Reveal.next();
-        }, Number(event.currentSlide.getAttribute("data-autoslide"))))
+        }, Number(event.currentSlide.getAttribute("data-autoslide"))));
     }
 
     show_hide();
