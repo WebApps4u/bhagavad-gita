@@ -153,6 +153,13 @@ function switch_audio(onoff) {
     }
 }
 
+function switch_audio_cordova(onoff) {
+    if (onoff === "ON")
+        play_now(document.nav.select_verse.value);
+    else
+        media_gita.stop();
+}
+
 function toggle_audio(button) {
 
     button.value = (button.value === "ON" ? "OFF" : "ON");
@@ -161,6 +168,8 @@ function toggle_audio(button) {
 
     if (!window.cordova)
         switch_audio(button.value);
+    else
+        switch_audio_cordova(button.value);
 }
 
 Reveal.initialize({
