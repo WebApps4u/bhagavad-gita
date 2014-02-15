@@ -23,6 +23,7 @@
 
   <gap:plugin name="org.apache.cordova.media" />
   <gap:plugin name="org.apache.cordova.core.Device"/>
+  <gap:plugin name="org.apache.cordova.core.file"/>
   
   <access origin="http://127.0.0.1*" />
   

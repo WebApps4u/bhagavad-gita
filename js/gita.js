@@ -333,7 +333,7 @@ function onDeviceReady() {
 
 function play_now(verse_no) {
     if (media_gita === null) {
-        var src = "https://dl.dropboxusercontent.com/u/70222818/Gita/audio/gita" + chapter + ".mp3";
+        var src = "audio/gita" + chapter + ".mp3";
         media_gita = new Media(src, onSuccess, onError);
     }
     
