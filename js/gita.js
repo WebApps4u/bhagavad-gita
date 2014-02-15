@@ -190,14 +190,14 @@ Reveal.addEventListener('ready', function (event) {
         Reveal.right();
         return;
     }
-    
-    if (window.cordova) document.addEventListener("deviceready", onDeviceReady, false);
 });
  
 Reveal.addEventListener('slidechanged', function (event) {
 
     var slideid = event.currentSlide.id;
     var c = (chapter === 0 ? 1 : chapter);
+    
+    console.log("slidechanged: currentSlide.id = " + slideid);
     
     if (slideid.substring(0, 4) === "link") {
         location.href = slideid.split("_")[1] + ".html#/" + "gita_" + (c-1).toString() + "-" + verse_count[c-1];
@@ -320,13 +320,23 @@ function add_verse(count) {
 
 var media_gita = null;
 
+if (window.cordova) document.addEventListener("deviceready", onDeviceReady, false);
+
 function onDeviceReady() {
-    var src = "audio/gita" + chapter + ".mp3";
-    media_gita = new Media(src, onSuccess, onError);
+    if (media_gita === null) {
+        var src = "audio/gita" + chapter + ".mp3";
+        media_gita = new Media(src, onSuccess, onError);
+    }
+    
     if (sessionStorage["au_audible"] === "ON") play_now(document.nav.select_verse.value);
 }
 
 function play_now(verse_no) {
+    if (media_gita === null) {
+        var src = "audio/gita" + chapter + ".mp3";
+        media_gita = new Media(src, onSuccess, onError);
+    }
+    
     media_gita.seekTo(audio_pos[verse_no]);
     media_gita.play();
 }
