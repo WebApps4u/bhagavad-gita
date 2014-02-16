@@ -968,7 +968,7 @@ window.onload = function () {
     document.getElementById("en_visible").title = "Toggle English translation. [E]-KEY";
     document.getElementById("au_audible").title = "Toggle Audio. [A]-KEY";
 
-    if (!window.cordova  && chapter !== 0) create_audio_tags(document.getElementById("au_audible").value);
+    if (!window.cordova) create_audio_tags(document.getElementById("au_audible").value);
 };
 
 function create_audio_tags(onoff) {
