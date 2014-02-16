@@ -1212,10 +1212,12 @@ var media_gita = null;
 
 if (window.cordova) document.addEventListener("deviceready", onDeviceReady, false);
 
+var now_playing;
 function onDeviceReady() {
     if (media_gita === null) {
         var src = "file:///android_asset/www/audio/gita" + ch.lpad0(2) + ".mp3";
         console.log("playing " + src);
+        now_playing = src;
         media_gita = new Media(src, onSuccess, onError);
     }
     
@@ -1226,9 +1228,10 @@ function play_now(verse_no) {
     var fn = "file:///android_asset/www/audio/gita" + ch.lpad0(2) + ".mp3";
     console.log("play_now('" + verse_no + "') / file = " + fn + " / audio_pos[verse_no] = " + audio_pos[verse_no]);
     
-    if (media_gita !== null && media_gita.src !== fn) {
+    if (media_gita !== null && now_playing !== fn) {
         media_gita.release();
         media_gita = new Media(fn, onSuccess, onError);
+        now_playing = fn;
     }
     
     if (media_gita === null) {
