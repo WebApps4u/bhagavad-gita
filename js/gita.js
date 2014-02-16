@@ -1223,8 +1223,8 @@ function onDeviceReady() {
 }
 
 function play_now(verse_no) {
-    console.log("play_now('" + verse_no + "') / audio_pos[verse_no] = " + audio_pos[verse_no]);
     var fn = "file:///android_asset/www/audio/gita" + ch.lpad0(2) + ".mp3";
+    console.log("play_now('" + verse_no + "') / file = " + fn + " / audio_pos[verse_no] = " + audio_pos[verse_no]);
     
     if (media_gita !== null && media_gita.src !== fn) {
         media_gita.release();
@@ -1234,7 +1234,7 @@ function play_now(verse_no) {
     if (media_gita === null) {
         media_gita = new Media(fn, onSuccess, onError);
     }
-    console.log("playing " + src);
+
     media_gita.play();
     media_gita.seekTo(Math.floor(audio_pos[verse_no] * 1000));
 }
