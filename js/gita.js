@@ -1063,10 +1063,10 @@ function toggle_audio(button) {
     sessionStorage[button.id] = button.value;
     button.blur();
 
-    if (!window.cordova)
-        switch_audio(button.value);
-    else
+    if (window.cordova)
         switch_audio_cordova(button.value);
+    else
+        switch_audio(button.value);
 }
 
 Reveal.initialize({
@@ -1230,7 +1230,25 @@ function add_verse(count) {
 
 var media_gita = null;
 
-if (window.cordova) document.addEventListener("deviceready", onDeviceReady, false);
+if (window.cordova) { 
+    document.addEventListener("deviceready", onDeviceReady, false);
+    document.addEventListener("pause", onPause, false);
+    document.addEventListener("menubutton", onMenu, false);
+}
+
+function onMenu() {
+    var event = document.createEvent('MouseEvents');;
+    event.initMouseEvent('mousedown', true, true, window);
+    document.getElementById("select_chapter").dispatchEvent(event);
+}
+
+function onPause() {
+    if (sessionStorage["au_audible"] === "ON") {
+        document.getElementById("au_audible").value = "OFF";
+        sessionStorage["au_audible"] = "OFF";
+        switch_audio_cordova("OFF");
+    }
+}
 
 var now_playing;
 function onDeviceReady() {
@@ -1238,7 +1256,7 @@ function onDeviceReady() {
         var src = "file:///android_asset/www/audio/gita" + ch.lpad0(2) + ".mp3";
         console.log("playing " + src);
         now_playing = src;
-        media_gita = new Media(src, onSuccess, onError);
+        media_gita = new Media(src, onSuccess, onError, mediaStatus);
     }
     
     if (sessionStorage["au_audible"] === "ON") play_now(document.nav.select_verse.value);
