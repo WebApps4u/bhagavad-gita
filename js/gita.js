@@ -25,7 +25,7 @@ var audio_pos;
 function set_audio_pos() {
     switch (chapter) {
         case 1: audio_pos = {
-        1: 25.236,
+        1: 20.000,
         2: 45.950,
         3: 65.727,
         4: 83.911,
@@ -76,7 +76,7 @@ function set_audio_pos() {
         49: 879.000
     }; break;
         case 2: audio_pos = {
-            1: 20.435,
+            1: 15.000,
             2: 40.520,
             3: 59.764,
             4: 78.543,
@@ -1179,7 +1179,6 @@ function show_hide() {
     var slide = Reveal.getCurrentSlide();
     var slideid = slide.id;
     var s = slideid.split("_");
-    var sa = [];
 
     if (s.length === 2) {
         var sa_id = "gita_sa_" + s[1];
@@ -1251,16 +1250,28 @@ function play_now(verse_no) {
     
     if (media_gita !== null && now_playing !== fn) {
         media_gita.release();
-        media_gita = new Media(fn, onSuccess, onError);
         now_playing = fn;
+        media_gita = new Media(fn, onSuccess, onError, mediaStatus);
     }
     
     if (media_gita === null) {
-        media_gita = new Media(fn, onSuccess, onError);
+        now_playing = fn;
+        media_gita = new Media(fn, onSuccess, onError, mediaStatus);
     }
 
     media_gita.play();
     media_gita.seekTo(Math.floor(audio_pos[verse_no] * 1000));
+}
+
+function mediaStatus(status) {
+    switch(status){
+        case Media.MEDIA_NONE: console.log(now_playing + " Status: MEDIA_NONE"); break;
+        case Media.MEDIA_STARTING: console.log(now_playing + " Status: MEDIA_STARTING"); break;
+        case Media.MEDIA_RUNNING: console.log(now_playing + " Status: MEDIA_RUNNING"); break;
+        case Media.MEDIA_PAUSED: console.log(now_playing + " Status: MEDIA_PAUSED"); break;
+        case Media.MEDIA_STOPPED: console.log(now_playing + " Status: MEDIA_STOPPED"); break;
+        default: console.log(now_playing + " Status: UNKNOWN = " + status); break;
+    }
 }
 
 function onSuccess() {
