@@ -245,55 +245,37 @@ function set_audio_pos() {
             44: 791.565
         }; break;
         case 5: audio_pos = {
-            1: 25.236,
-            2: 45.950,
-            3: 65.727,
-            4: 83.911,
-            5: 100.833,
-            6: 117.672,
-            7: 135.851,
-            8: 152.628,
-            9: 169.723,
-            10: 187.937,
-            11: 205.119,
-            12: 221.423,
-            13: 238.512,
-            14: 255.115,
-            15: 272.088,
-            16: 289.306,
-            17: 304.797,
-            18: 322.728,
-            19: 339.672,
-            20: 356.528,
-            21: 380.836,
-            22: 391.809,
-            23: 408.421,
-            24: 425.548,
-            25: 445.954,
-            26: 462.440,
-            27: 480.630,
-            28: 497.706,
-            29: 518.295,
-            30: 534.317,
-            31: 550.649,
-            32: 566.395,
-            33: 582.930,
-            34: 600.868,
-            35: 618.668,
-            36: 634.740,
-            37: 652.300,
-            38: 669.120,
-            39: 685.621,
-            40: 702.107,
-            41: 718.201,
-            42: 735.340,
-            43: 751.710,
-            44: 769.924,
-            45: 785.539,
-            46: 801.880,
-            47: 819.701,
-            48: 839.234,
-            49: 879.000
+            1: 14.367,
+            2: 40.967,
+            3: 61.608,
+            4: 78.557,
+            5: 96.334,
+            6: 113.226,
+            7: 130.300,
+            8: 147.142,
+            9: 164.339,
+            10: 180.933,
+            11: 197.674,
+            12: 215.002,
+            13: 231.576,
+            14: 248.468,
+            15: 265.250,
+            16: 282.210,
+            17: 299.349,
+            18: 318.036,
+            19: 334.658,
+            20: 352.796,
+            21: 370.474,
+            22: 388.180,
+            23: 405.167,
+            24: 422.632,
+            25: 440.570,
+            26: 458.768,
+            27: 476.648,
+            28: 495.923,
+            29: 514.031,
+            30: 531.891,
+            31: 573.852
         }; break;
         case 6: audio_pos = {
             1: 25.236,
@@ -1228,6 +1210,7 @@ var media_gita = null;
 if (window.cordova) { 
     document.addEventListener("deviceready", onDeviceReady, false);
     document.addEventListener("pause", onPause, false);
+    document.addEventListener("resume", onResume, false);
     document.addEventListener("menubutton", onMenu, false);
 }
 
@@ -1240,9 +1223,13 @@ function onMenu() {
 function onPause() {
     if (sessionStorage["au_audible"] === "ON") {
         document.getElementById("au_audible").value = "OFF";
-        sessionStorage["au_audible"] = "OFF";
         switch_audio_cordova("OFF");
     }
+}
+
+function onResume() {
+    document.getElementById("au_audible").value = sessionStorage["au_audible"];
+    switch_audio_cordova(sessionStorage["au_audible"]);
 }
 
 var now_playing;
