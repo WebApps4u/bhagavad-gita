@@ -1278,7 +1278,11 @@ function play_now(verse_no) {
     }
 
     media_gita.play();
-    media_gita.seekTo(Math.floor(audio_pos[verse_no] * 1000));
+    
+    setTimeout(function () {
+       media_gita.seekTo(Math.floor(audio_pos[verse_no] * 1000)); 
+    }, 500);
+    
 }
 
 function mediaStatus(status) {
