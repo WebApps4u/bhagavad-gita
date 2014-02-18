@@ -873,8 +873,15 @@ function switch_audio(onoff) {
 }
 
 function switch_audio_cordova(onoff) {
-    if (onoff === "ON")
+    
+    if (onoff === "ON") {
         play_now(document.nav.select_verse.value);
+        var cur_verse_duration = Math.floor((audio_pos[Number(document.nav.select_verse.value) + 1] - audio_pos[document.nav.select_verse.value]) * 1000);
+        timeouts.push(setTimeout(function () { 
+            Reveal.next();
+        }, cur_verse_duration)); 
+    }
+    
     else {
         media_gita.stop();
         for (var t in timeouts) clearTimeout(timeouts[t]); timeouts = [];
@@ -1094,7 +1101,13 @@ function onDeviceReady() {
         media_gita = new Media(src, onSuccess, onError, mediaStatus);
     }
     
-    if (sessionStorage["au_audible"] === "ON") play_now(document.nav.select_verse.value);
+    if (sessionStorage["au_audible"] === "ON") {
+        play_now(document.nav.select_verse.value);
+        var cur_verse_duration = Math.floor((audio_pos[Number(document.nav.select_verse.value) + 1] - audio_pos[document.nav.select_verse.value]) * 1000);
+        timeouts.push(setTimeout(function () { 
+            Reveal.next();
+        }, cur_verse_duration + 500));    
+    }
 }
 
 function play_now(verse_no) {
