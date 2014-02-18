@@ -24,6 +24,7 @@
   <gap:plugin name="org.apache.cordova.media" />
   <gap:plugin name="org.apache.cordova.core.Device"/>
   <gap:plugin name="org.apache.cordova.core.file"/>
+  <gap:plugin name="nl.x-services.plugins.insomnia" />
   
   <access origin="http://127.0.0.1*" />
   

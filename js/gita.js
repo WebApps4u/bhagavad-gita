@@ -804,7 +804,7 @@ window.onload = function () {
 
     ch = (chapter === 0 ? 1 : chapter);
     set_audio_pos();
-     
+
     document.getElementById("select_chapter").getElementsByTagName('option')[ch - 1].selected = 'selected';
     add_verse(verse_count[ch]);
 
@@ -1092,6 +1092,8 @@ function onPause() {
         switch_audio_cordova("OFF");
         for (var t in timeouts) clearTimeout(timeouts[t]); timeouts = [];
     }
+    
+    window.plugins.insomnia.allowSleepAgain();
 }
 
 function onResume() {
@@ -1102,6 +1104,8 @@ function onResume() {
     timeouts.push(setTimeout(function () { 
         Reveal.next();
     }, cur_verse_duration));
+    
+    window.plugins.insomnia.keepAwake();
 }
 
 var now_playing;
@@ -1120,6 +1124,8 @@ function onDeviceReady() {
             Reveal.next();
         }, cur_verse_duration + 500));    
     }
+    
+    window.plugins.insomnia.keepAwake();
 }
 
 function play_now(verse_no) {
