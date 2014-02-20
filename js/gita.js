@@ -1,4 +1,4 @@
-var chapter, ch;
+var chapter = 0, ch = 0;
 var verse_count = {
     1: 48,
     2: 73,
