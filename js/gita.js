@@ -918,6 +918,8 @@ Reveal.initialize({
     history: true,
     center: true,
     margin: 0,
+    parallaxBackgroundImage: 'splash.png',
+    parallaxBackgroundSize: '1600px 800px',
 
     theme: Reveal.getQueryHash().theme || 'serif', // available themes are in /css/theme
     transition: Reveal.getQueryHash().transition || 'default' // default/cube/page/concave/zoom/linear/fade/none
