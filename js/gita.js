@@ -1002,8 +1002,8 @@ Reveal.addEventListener('slidechanged', function (event) {
 document.onkeydown = function (evt) {
     evt = evt || window.event;
     switch (evt.keyCode) {
-        case 67: document.nav.select_chapter.focus(); break;
-        case 86: document.nav.select_verse.focus(); break;
+        case 67: document.nav.select_chapter.focus(); dropdown(document.nav.select_chapter); break;
+        case 86: document.nav.select_verse.focus(); dropdown(document.nav.select_verse); break;
         case 83: toggle(document.getElementById("sa_visible")); break;
         case 69: toggle(document.getElementById("en_visible")); break;
         case 84: toggle(document.getElementById("tr_visible")); break;
@@ -1011,6 +1011,12 @@ document.onkeydown = function (evt) {
         //default: alert(evt.keyCode); break;
     }
 };
+
+function dropdown(d) {
+    var event = document.createEvent('MouseEvents');;
+    event.initMouseEvent('mousedown', true, true, window);
+    d.dispatchEvent(event);    
+}
 
 function toggle(button) {
     button.value = (button.value === "ON" ? "OFF" : "ON");
@@ -1083,9 +1089,7 @@ if (window.cordova) {
 }
 
 function onMenu() {
-    var event = document.createEvent('MouseEvents');;
-    event.initMouseEvent('mousedown', true, true, window);
-    document.getElementById("select_chapter").dispatchEvent(event);
+    dropdown(document.getElementById("select_chapter"));
 }
 
 function onPause() {
