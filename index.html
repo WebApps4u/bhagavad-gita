@@ -41,7 +41,7 @@
     <nav>
         <form name="nav" style="display:inline">
             <strong>अध्यायः &nbsp;</strong>
-            <select id="select_chapter" name="select_chapter" onchange="chapter_change();" style="font-size:medium;">
+            <select id="select_chapter" name="select_chapter" style="font-size:medium;">
                 <option value="1">1. अर्जुनविषादयोगः</option>
                 <option value="2">2. साङ्ख्ययोगः</option>
                 <option value="3">3. कर्मयोगः</option>
@@ -63,7 +63,7 @@
             </select>
 
             <strong>श्लोकः &nbsp;</strong>
-            <select id="select_verse" name="select_verse" onchange="verse_change();" style="font-size:medium;"></select>
+            <select id="select_verse" name="select_verse" style="font-size:medium;"></select>
 
             <div id="wait" style="display: table; margin-right: auto; margin-left: auto;">
                 <br /><br /><br /><br /><br /><br />
@@ -92,21 +92,21 @@
     <footer>
         <form style="position: absolute; left: 5px; bottom: 5px; z-index: 100; ">
             <small><strong>सं</strong></small>
-            <input id="sa_visible" type="button" value="ON" style="height: 30px;" onclick="toggle(this);" />
+            <input id="sa_visible" type="button" value="ON" style="height: 30px;" />
 
             <small>EN:</small>
-            <input id="en_visible" type="button" value="ON" style="height: 30px;" onclick="toggle(this);" />
+            <input id="en_visible" type="button" value="ON" style="height: 30px;" />
 
             <small>TR:</small>
-            <input id="tr_visible" type="button" value="ON" style="height: 30px;" onclick="toggle(this);" />
+            <input id="tr_visible" type="button" value="ON" style="height: 30px;" />
 
             &nbsp;
             <small>AU:</small>
-            <input id="au_audible" type="button" value="OFF" style="height: 30px;" onclick="toggle_audio(this);" />
+            <input id="au_audible" type="button" value="OFF" style="height: 30px;" />
 
             &nbsp;
-            <input id="previous_verse" type="button" value="<" style="width: 25px; height: 35px;" onclick="Reveal.left(); this.blur();" />
-            <input id="next_verse" type="button" value=">" style="width: 25px; height: 35px; " onclick="Reveal.right(); this.blur();" />
+            <input id="previous_verse" type="button" value="<" style="width: 25px; height: 35px;" />
+            <input id="next_verse" type="button" value=">" style="width: 25px; height: 35px;" />
         </form>
     </footer>
 
@@ -114,6 +114,6 @@
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.min.js"></script>
     <script src="js/gita.js"></script>
-    <script>chapter = 0;</script>
+    <p id="chapter" hidden>0</p>
 </body>
 </html>

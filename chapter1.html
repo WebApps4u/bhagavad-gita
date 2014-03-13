@@ -25,7 +25,7 @@
 <nav>
 <form name=nav style=display:inline>
 <strong>अध्यायः &nbsp;</strong>
-<select id=select_chapter name=select_chapter onchange=chapter_change() style=font-size:medium>
+<select id=select_chapter name=select_chapter style=font-size:medium>
 <option value=1>1. अर्जुनविषादयोगः</option>
 <option value=2>2. साङ्ख्ययोगः</option>
 <option value=3>3. कर्मयोगः</option>
@@ -46,7 +46,7 @@
 <option value=18>18. मोक्षसंन्यासयोगः</option>
 </select>
 <strong>श्लोकः &nbsp;</strong>
-<select id=select_verse name=select_verse onchange=verse_change() style=font-size:medium></select>
+<select id=select_verse name=select_verse style=font-size:medium></select>
 <div id=wait style=display:table;margin-right:auto;margin-left:auto>
 <br /><br /><br /><br /><br /><br />
 Please wait ...
@@ -1014,6 +1014,6 @@ THE YOGA OF THE ARJUNA-GRIEF<br />
 <script src=lib/js/head.min.js></script>
 <script src=js/reveal.min.js></script>
 <script src=js/gita.js></script>
-<script>chapter=1;</script>
+<p id="chapter" hidden>1</p>
 </body>
 </html>

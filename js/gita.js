@@ -802,6 +802,7 @@ function set_audio_pos() {
 
 window.onload = function () {
 
+    chapter = Number(document.getElementById("chapter").innerText);
     ch = (chapter === 0 ? 1 : chapter);
     set_audio_pos();
 
@@ -813,16 +814,31 @@ window.onload = function () {
     if (typeof sessionStorage["en_visible"] === "undefined") sessionStorage["en_visible"] = "ON";
     if (typeof sessionStorage["au_audible"] === "undefined") sessionStorage["au_audible"] = "OFF";
 
-    document.getElementById("sa_visible").value = sessionStorage["sa_visible"];
-    document.getElementById("tr_visible").value = sessionStorage["tr_visible"];
-    document.getElementById("en_visible").value = sessionStorage["en_visible"];
-    document.getElementById("au_audible").value = sessionStorage["au_audible"];
+    var sa_visible = document.getElementById("sa_visible");
+    var tr_visible = document.getElementById("tr_visible");
+    var en_visible = document.getElementById("en_visible");
+    var au_audible = document.getElementById("au_audible");
+    
+    sa_visible.value = sessionStorage["sa_visible"];
+    tr_visible.value = sessionStorage["tr_visible"];
+    en_visible.value = sessionStorage["en_visible"];
+    au_audible.value = sessionStorage["au_audible"];
 
-    document.getElementById("sa_visible").title = "Toggle Sanskrit text. [S]-KEY";
-    document.getElementById("tr_visible").title = "Toggle transliteration. [T]-KEY";
-    document.getElementById("en_visible").title = "Toggle English translation. [E]-KEY";
-    document.getElementById("au_audible").title = "Toggle Audio. [A]-KEY";
+    sa_visible.title = "Toggle Sanskrit text. [S]-KEY";
+    tr_visible.title = "Toggle transliteration. [T]-KEY";
+    en_visible.title = "Toggle English translation. [E]-KEY";
+    au_audible.title = "Toggle Audio. [A]-KEY";
 
+    sa_visible.onclick = function() {toggle(this);};
+    tr_visible.onclick = function() {toggle(this);};
+    en_visible.onclick = function() {toggle(this);};
+    au_audible.onclick = function() {toggle_audio(this);};
+    
+    document.getElementById("previous_verse").onclick = function() {Reveal.left(); this.blur();};
+    document.getElementById("next_verse").onclick = function() {Reveal.right(); this.blur();};
+    document.getElementById("select_chapter").onchange = chapter_change;
+    document.getElementById("select_verse").onchange = verse_change;
+    
     if (!window.cordova) create_audio_tags(document.getElementById("au_audible").value);
 };
 
@@ -879,7 +895,8 @@ function switch_audio(onoff) {
         }
 
         else {
-            document.getElementById(au_id).pause();
+            var au = document.getElementById(au_id);
+            if (au !== null) au.pause();
         }
     }
 }
@@ -953,12 +970,14 @@ Reveal.addEventListener('slidechanged', function (event) {
     var slideid = event.currentSlide.id;
     
     if (slideid.substring(0, 4) === "link" && Reveal.isFirstSlide()) {
-        location.href = slideid.split("_")[1] + ".html#/" + "gita_" + (ch-1).toString() + "-" + verse_count[ch-1];
+        var url = slideid.split("_")[1] + ".html#/" + "gita_" + (ch-1).toString() + "-" + verse_count[ch-1];
+        location.replace(url);
         return;
     }
 
     if (slideid.substring(0, 4) === "link" && Reveal.isLastSlide()) {
-        location.href = slideid.split("_")[1] + ".html";
+        var url = slideid.split("_")[1] + ".html";
+        location.replace(url);
         return;
     }
 
