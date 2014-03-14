@@ -1216,3 +1216,20 @@ Number.prototype.lpad0 = function(length) {
     var str = this.toString();
     return str.lpad("0", length);
 };
+
+function logCacheEvent(event) {
+    console.log(event.type);
+    switch (event.type) {
+        case "updateready":
+            window.applicationCache.swapCache();
+            break;
+    }
+}
+
+window.applicationCache.addEventListener('checking',logCacheEvent,false);
+window.applicationCache.addEventListener('noupdate',logCacheEvent,false);
+window.applicationCache.addEventListener('downloading',logCacheEvent,false);
+window.applicationCache.addEventListener('cached',logCacheEvent,false);
+window.applicationCache.addEventListener('updateready',logCacheEvent,false);
+window.applicationCache.addEventListener('obsolete',logCacheEvent,false);
+window.applicationCache.addEventListener('error',logCacheEvent,false);
