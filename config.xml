@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "org.sanjay.gita"
+    versionCode = "10"
+    version     = "1.0.0" >
+
+  <!-- versionCode is optional and Android only -->
+
+  <name>Bhagavad Gita</name>
+
+  <description>
+    Presentation of Srimad Bhagavad Gita with chanting, Sanskrit text, Roman transliteration and English translation.
+  </description>
+
+  <author href="http://svarma.tx0.org" email="svarma@yahoo.com">
+    Sanjay Varma
+  </author>
+
+  <gap:platform name="ios" />
+  <gap:platform name="android" />
+  <gap:platform name="winphone" />
+
+  <gap:plugin name="org.apache.cordova.media" />
+  <gap:plugin name="org.apache.cordova.core.Device"/>
+  <gap:plugin name="org.apache.cordova.core.file"/>
+  <gap:plugin name="nl.x-services.plugins.insomnia" />
+  
+  <access origin="http://127.0.0.1*" />
+  
+  <icon src="icon.png" />
+  
+  <gap:splash src="splash.png" />
+  
+  <preference name="phonegap-version" value="3.1.0" />
+  <preference name="fullscreen" value="true" />
+  <preference name="permissions" value="none"/>
+  <preference name="splash-screen-duration" value="10000"/>
+</widget>

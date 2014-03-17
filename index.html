@@ -1,0 +1,119 @@
+﻿<!doctype html>
+<html lang="en" manifest="cache.manifest">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Srimad Bhagavad Gita</title>
+
+    <meta name="description" content="Srimad Bhagavad Gita with chanting, Sanskrit text, Roman transliteration and English translation.">
+    <meta name="author" content="Maharishi Veda Vyasa">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta property="og:url" content="http://svarma.tx0.org/gita/" />
+    <meta property="og:image" content="http://svarma.tx0.org/gita/screenshot.png" />
+    <meta property="og:title" content="Srimad Bhagavad Gita" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Presentation of Srimad Bhagavad Gita with chanting, Sanskrit text, Roman transliteration and English translation." />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet 
+    <script>
+        document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+    </script>
+    -->
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head> 
+<body>
+    <nav>
+        <form name="nav" style="display:inline">
+            <strong>अध्यायः &nbsp;</strong>
+            <select id="select_chapter" name="select_chapter" style="font-size:medium;">
+                <option value="1">1. अर्जुनविषादयोगः</option>
+                <option value="2">2. साङ्ख्ययोगः</option>
+                <option value="3">3. कर्मयोगः</option>
+                <option value="4">4. ज्ञानकर्मसंन्यासयोगः</option>
+                <option value="5">5. संन्यासयोगः</option>
+                <option value="6">6. आत्मसंयमयोगः</option>
+                <option value="7">7. ज्ञानविज्ञानयोगः</option>
+                <option value="8">8. अक्षरब्रह्मयोगः</option>
+                <option value="9">9. राजविद्याराजगुह्ययोगः</option>
+                <option value="10">10. विभूतियोगः</option>
+                <option value="11">11. विश्वरूपदर्शनयोगः</option>
+                <option value="12">12. भक्तियोगः</option>
+                <option value="13">13. क्षेत्रक्षेत्रज्ञविभागयोगः</option>
+                <option value="14">14. गुणत्रयविभागयोगः</option>
+                <option value="15">15. पुरुषोत्तमयोगः</option>
+                <option value="16">16. दैवासुरसम्पद्विभागयोगः</option>
+                <option value="17">17. श्रद्धात्रयविभागयोगः</option>
+                <option value="18">18. मोक्षसंन्यासयोगः</option>
+            </select>
+
+            <strong>श्लोकः &nbsp;</strong>
+            <select id="select_verse" name="select_verse" style="font-size:medium;"></select>
+
+            <div id="wait" style="display: table; margin-right: auto; margin-left: auto;">
+                <br /><br /><br /><br /><br /><br />
+                Please wait ...
+            </div>
+        </form>
+    </nav>    
+    <div class="reveal">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section id="gita_title">
+                <section id="gita_title_sa">
+                    <small>ॐ श्री परमात्मने नमः</small><br />
+                    <h2>अथ श्रीमद्भगवद्गीता</h2>
+                </section>
+                <section id="gita_title_tr">
+                    <small>OM śrī paramātmane namaḥ</small><br />
+                    <h2>atha śrīmadbhagavadgītā</h2>
+                </section>
+            </section>
+            <section id="link_chapter1"></section>
+        </div>
+    </div>
+
+    <footer>
+        <form style="position: absolute; left: 5px; bottom: 5px; z-index: 100; ">
+            <small><strong>सं</strong></small>
+            <input id="sa_visible" type="button" value="ON" style="height: 30px;" />
+
+            <small>EN:</small>
+            <input id="en_visible" type="button" value="ON" style="height: 30px;" />
+
+            <small>TR:</small>
+            <input id="tr_visible" type="button" value="ON" style="height: 30px;" />
+
+            &nbsp;
+            <small>AU:</small>
+            <input id="au_audible" type="button" value="OFF" style="height: 30px;" />
+
+            &nbsp;
+            <input id="previous_verse" type="button" value="<" style="width: 25px; height: 35px;" />
+            <input id="next_verse" type="button" value=">" style="width: 25px; height: 35px;" />
+        </form>
+    </footer>
+
+    <script src="cordova.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script src="js/gita.js"></script>
+    <p id="chapter" hidden>0</p>
+</body>
+</html>
