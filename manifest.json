@@ -1,7 +1,7 @@
 {
   "name": "Bhagavad Gita",
   "description": "Presentation of Srimad Bhagavad Gita with chanting, Sanskrit text, Roman transliteration and English translation.",
-  "version": "0.1",
+  "version": "0.2",
   "app": {
     "background": {
       "scripts": ["js/background.js"]

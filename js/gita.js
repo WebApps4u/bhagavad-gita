@@ -802,7 +802,7 @@ function set_audio_pos() {
 
 window.onload = function () {
 
-    chapter = Number(document.getElementById("chapter").innerText);
+    chapter = Number(document.getElementById("chapter").textContent);
     ch = (chapter === 0 ? 1 : chapter);
     set_audio_pos();
 
