@@ -1,14 +1,14 @@
 Srimad Bhagavad Gita
 ====================
 
-Presentation of Bhagavad Gita with Sanskrit text, transliteration, English translation and chanting.
+Presentation of Bhagavad Gita with Sanskrit text, transliteration, English translation and synchronized chanting.
 
 Online: http://svarma.tx0.org/gita
 
-Android binary install
-----------------------
-1. Allow sources other than Google store by checking Settings -> Security -> Unknown Sources
-2. Download and install the app from http://goo.gl/xQcmTy
+Chrome: http://goo.gl/j4OdLP
+
+Android: http://goo.gl/xQcmTy (check Settings -> Security -> Unknown Sources)
+
 
 Usage
 -----
