@@ -7,7 +7,7 @@ Online: http://svarma.tx0.org/gita
 
 Chrome: http://goo.gl/j4OdLP
 
-Android: http://goo.gl/xQcmTy (check Settings -> Security -> Unknown Sources)
+Android: http://slideme.org/application/bhagavad-gita-0
 
 
 Usage
