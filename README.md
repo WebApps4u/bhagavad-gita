@@ -1,7 +1,7 @@
 Srimad Bhagavad Gita
 ====================
 
-Presentation of Bhagavad Gita with Sanskrit text, transliteration, English translation and synchronized chanting.
+A nice way to study the Srimad Bhagavad Gita. A presentation of the Sanskrit text along with Roman transliteration and English translation from The Holy Gita of Swami Chinmayananda synchronized with correct, clear and resonaant chanting by Swami Brahmananda of the Chinmaya Mission.
 
 Online: http://svarma.tx0.org/gita
 
